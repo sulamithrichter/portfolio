@@ -12,7 +12,7 @@
   --accent-green: #4ade80;
   --text-primary: #ffffff;
   --text-secondary: rgba(255, 255, 255, 0.48);
-  --text-muted: rgba(255, 255, 255, 0.28);
+  --text-muted: rgba(255, 255, 255, 0.55);
 }
 
 @theme inline {
@@ -64,7 +64,7 @@ body {
   font-size: 0.68rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.28);
+  color: var(--text-muted);
   font-weight: 500;
 }
 
