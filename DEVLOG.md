@@ -313,3 +313,82 @@ Funktionswunsch: Nav-Links sollen weiss leuchten, wenn die zugehörige Section i
 
 ---
 
+## Session 3 — 2026-05-14 — Suchmaschinen-Indexierung via Google Search Console
+
+### Ausgangslage
+Die Site ist live, technisch sauber, OG-Image vorhanden. Damit Google die Seite findet, muss sie aber aktiv bei der **Google Search Console** angemeldet werden — Sitemap einreichen, Domain verifizieren, Crawl-Status beobachten.
+
+### Property-Typ: Domain statt URL-Präfix
+
+Search Console bietet zwei Verifikationswege:
+
+| Option | Wie funktioniert die Verifikation | Was wird erfasst |
+|---|---|---|
+| **Domain** | DNS-TXT-Record | Alle Protokoll/Subdomain-Varianten (http/https/www/non-www) in einem |
+| **URL-Präfix** | HTML-Datei, Meta-Tag oder Analytics | Nur exakt die angegebene URL-Variante |
+
+**Entscheidung: Domain-Property.**
+
+**Begründung:** Auch wenn das URL-Präfix-Verfahren einfacher zu verifizieren wäre (eine Datei hochladen), erfordert es separate Verifikationen pro Subdomain/Protokoll. Bei einer aktiven `https://`-Site mit `www.`-Redirect ist das mehrfacher Aufwand für den gleichen Effekt. Domain-Property ist zukunftssicher.
+
+### Lernmoment 1 — DNS-RRset & TTL-Regel
+
+Beim Eintragen des Google-Verification-TXT-Records bei Hostpoint kam die Fehlermeldung:
+
+> *„Folgende Records können keine unterschiedliche TTL haben: sulamithrichter.ch TXT '...' TTL 300, sulamithrichter.ch TXT '...' TTL 3600"*
+
+**Was ist passiert:** Der bestehende SPF-TXT (`v=spf1 redirect=spf.mail.hostpoint.ch`) hatte TTL 300, der neue Google-TXT war mit der Hostpoint-Default-TTL 3600 vorausgewählt. DNS verlangt aber, dass alle Records mit **identischem Namen UND identischem Typ** ein „RRset" bilden und denselben TTL haben.
+
+**Fix:** TTL des neuen Records auf 300 abgesenkt, dann Speichern akzeptiert.
+
+**Reflexionspunkt:** RRset ist ein Konzept aus dem DNS-Standard (RFC 2181), das in vielen UI-Erklärungen unterschlagen wird. Hostpoint zeigt dafür eine gute, präzise Fehlermeldung — andere Anbieter verschlucken den Fehler oder speichern inkonsistent. → **These:** Wenn ein Tool eine technisch korrekte Validierung *mit Erklärung* ausspielt, hilft das Einsteiger:innen mehr als jede Doku — der Fehler ist im Moment der Aktion, mit Kontext.
+
+### Lernmoment 2 — Sitemap-Pfad-Eingabe bei Domain-Property
+
+Beim Einreichen der Sitemap führte die intuitive Eingabe `https://sulamithrichter.ch/sitemap.xml` zur Fehlermeldung *„Ungültige Sitemap-Adresse"*.
+
+**Grund:** Bei Domain-Properties hat Search Console die Domain bereits als Präfix gesetzt; das Eingabefeld erwartet nur den **relativen Pfad** (`sitemap.xml`). Die volle URL wurde intern zu `https://sulamithrichter.ch/https://sulamithrichter.ch/sitemap.xml` zusammengebaut und als ungültig abgewiesen.
+
+**Fix:** Eingabe auf `sitemap.xml` (ohne Schrägstrich, ohne Domain) reduziert.
+
+### Lernmoment 3 — „Konnte nicht abgerufen werden" als transientes Symptom
+
+Nach erfolgreicher Einreichung zeigte die Tabelle:
+
+```
+Status: Konnte nicht abgerufen werden | Erkannte Seiten: 0
+```
+
+Diagnose mit `curl` (auch mit `-A "Googlebot/2.1"`-User-Agent) zeigte: HTTP 200, valides XML, korrekter `content-type: application/xml`. Die Sitemap war einwandfrei erreichbar.
+
+**Ursache:** Google hat im Moment der Einreichung die Sitemap abzurufen versucht — dabei vermutlich noch eine 404-Antwort aus dem Vercel-Edge-Cache erhalten (wie bei den initialen Robots/Sitemap-Tests in Session 2). Status wurde gespeichert, aber **nicht automatisch erneut probiert**.
+
+**Fix:** Sitemap-Eintrag manuell zum Re-Fetch zwingen (löschen + neu hinzufügen, oder „Erneut einreichen"). Resultat: Status auf „Erfolgreich", erste Seite erkannt.
+
+**Reflexionspunkt:** Edge-Caching ist (wie schon in Session 2 festgestellt) ein wiederkehrender Stolperstein, weil es **kein Trace und keine sichtbare Fehlerursache** produziert. Tools wie Search Console melden Folgewirkungen („Sitemap nicht abrufbar"), nicht die Wurzel („404 aus Cache, der inzwischen invalidiert wurde"). → **These:** Beim Debugging muss man systematisch das *aktuelle* Verhalten verifizieren (curl, dig), nicht dem *gespeicherten* Status eines Drittsystems vertrauen.
+
+### Erledigt in dieser Session
+- [x] Google Search Console: Property `sulamithrichter.ch` als Domain-Type angelegt
+- [x] DNS-TXT-Verification-Record bei Hostpoint hinzugefügt (TTL auf 300 angeglichen, SPF-Record geschont)
+- [x] Verifikation per `dig` (beide TXT-Records sichtbar, gleicher TTL)
+- [x] Search-Console-Verifikation erfolgreich durchgelaufen
+- [x] Sitemap `sitemap.xml` eingereicht (nach Pfad-Korrektur)
+- [x] Re-Fetch erzwungen → Status „Erfolgreich", 1 Seite erkannt
+
+### Architektur-Entscheidungen mit Begründung (Session 3)
+- **TXT-Records additiv, nicht überschrieben.** DNS erlaubt mehrere TXT-Records auf demselben Namen. Der existierende SPF *muss* bleiben (sonst landet Mail im Spam), der neue Google-Verification-Record kommt daneben. Begründung: Spezifikation erlaubt es, Praxis fordert es.
+- **TTL auf 300 statt 3600.** Weniger Aufwand: nur ein Record musste angepasst werden statt zwei. Praktischer Vorteil: schnellere Änderungen möglich, falls später z.B. iCloud Custom Domain einen weiteren TXT erfordert.
+
+### Reflexionspunkte für die Maturaarbeit (Session 3)
+1. **DNS-Standards als unterschwellige Komplexität.** Drei Stolpersteine in dieser Session hatten alle ihre Ursache in präzisen DNS-Regeln (RRset-TTL, mehrere TXT pro Name, Caching-Verhalten). Keine davon ist „falsch" — alle sind Konsequenzen einer 30 Jahre alten, ausgereiften Spezifikation. Aber Einsteiger:innen treffen auf die Konsequenzen, ohne die Regeln zu kennen. → **These:** Bestimmte Technologien (DNS, HTTP, TLS) haben über Jahrzehnte gewachsene Regeln, die in UIs gar nicht erst erklärt werden — sie werden vorausgesetzt. KI-Assistenz kann diese „implizite Voraussetzung" sichtbar machen, sobald sie als Friktion auftritt.
+2. **Tool-Fehlermeldungen als Lernkanal.** Die präzise Hostpoint-Fehlermeldung (mit Namen, Typ, beiden TTLs) ermöglichte das sofortige Verstehen des Problems — ohne sie hätte das gleiche Setup mit „Speichern fehlgeschlagen" mehrere Recherche-Runden gekostet. → **These:** Die Qualität der Fehlermeldungen eines Tools korreliert direkt mit der Lerngeschwindigkeit der Nutzenden. Das ist ein UX-Kriterium, das oft hinter „Hauptsache, es funktioniert" verschwindet.
+3. **Asynchrone Drittsystem-Stati.** Google Search Console zeigte „Konnte nicht abgerufen werden", obwohl die Sitemap zum gleichen Zeitpunkt erreichbar war. Der gespeicherte Status spiegelt einen einzelnen vergangenen Zeitpunkt, nicht den aktuellen Zustand. → **These:** Drittsystem-Stati sind Schnappschüsse, keine Live-Wahrheit. Beim Debugging zuerst den aktuellen Zustand prüfen (curl/dig), dann die UI dazu zwingen, einen neuen Snapshot zu machen — nicht umgekehrt.
+
+### Offen / Nächste Session
+- **Indexierung beobachten:** In Search Console unter „Indexierung → Seiten" in den nächsten 1–3 Tagen prüfen, ob die Startseite tatsächlich indexiert wurde.
+- **Site-Operator-Test:** Nach ~1 Woche im Google-Suchfeld `site:sulamithrichter.ch` eingeben — Erwartung: Startseite erscheint.
+- **Manuelles Anstossen:** Falls die Indexierung nicht in 1 Woche da ist, in Search Console → „URL-Prüfung" → URL eingeben → „Indexierung beantragen" klicken.
+- **Bing Webmaster Tools:** Optional ein zweites Mal denselben Vorgang für Bing (search.indexnow.org bzw. bing.com/webmasters) — Bing-Anteil in der Schweiz ist klein, aber kostenlos und in 5 Minuten erledigt.
+
+---
+
