@@ -60,7 +60,7 @@ export default function Contact() {
             </svg>
           </a>
           <a
-            href="https://www.linkedin.com/in/sulamithrichter"
+            href="https://www.linkedin.com/in/sulamith-richter-79a02b40b"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"

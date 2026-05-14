@@ -48,8 +48,9 @@ export default function Hero() {
           className="mt-7 max-w-2xl text-[1rem] leading-relaxed sm:text-[1.05rem]"
           style={{ color: "var(--text-secondary)" }}
         >
-          Ich entwickle massgeschneiderte Web-Applikationen und KI-Lösungen für
-          Schweizer KMUs – schnell, sauber und wartbar.
+          Web-Applikationen und KI-Lösungen für KMUs, Selbstständige und
+          Privatpersonen in der Schweiz. Damit Sie sich danach wieder um Ihren
+          Alltag kümmern können – nicht um die Software.
         </p>
 
         <div className="mt-9 flex flex-wrap gap-3">

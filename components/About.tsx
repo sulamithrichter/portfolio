@@ -23,8 +23,8 @@ export default function About() {
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <p className="section-label">Über mich</p>
         <h2 className="mt-3 max-w-2xl text-[1.75rem] font-semibold leading-tight tracking-tight sm:text-[2.25rem]">
-          Persönlich, regional und{" "}
-          <span className="gradient-text">technisch fundiert.</span>
+          Noch Schülerin.{" "}
+          <span className="gradient-text">Trotzdem ernst zu nehmen.</span>
         </h2>
 
         <div className="mt-12 grid grid-cols-1 gap-4 md:grid-cols-3">
@@ -35,14 +35,13 @@ export default function About() {
               Informatik-Studium · Universität Basel
             </span>
             <h3 className="card-title mt-4">
-              Gymnasiastin, Informatik-Studentin & Freelance-Entwicklerin aus
-              Basel
+              Schule in Muttenz, Studium in Basel, Kunden in der Region.
             </h3>
             <p className="body-text mt-3">
               Ich bin Schülerin am Gymnasium Muttenz und studiere parallel
               Informatik an der Universität Basel. Daneben arbeite ich als
               freischaffende Entwicklerin und baue Web-Applikationen, KI-Tools
-              und Automatisierungen für kleine und mittlere Unternehmen in der
+              und Automatisierungen für kleine und mittlere Unternehmen oder Privatpersonen in der
               Region.
             </p>
           </article>
@@ -55,8 +54,8 @@ export default function About() {
             </h3>
             <p className="body-text mt-3">
               Ich übernehme Verantwortung für das, was ich abliefere: ich
-              verstehe meinen Code, kann ihn erklären und langfristig warten.
-              Kein Black-Box-Output.
+              verstehe meinen Code, kann ihn erklären — und falls Sie in zwei
+              Jahren anrufen, finde ich mich auch dann noch zurecht.
             </p>
           </article>
 
@@ -127,7 +126,7 @@ export default function About() {
             </h3>
             <p className="body-text mt-3">
               Mitarbeit an der offiziellen Website des KTI Arlesheim
-              (Squarespace) – Inhalts­pflege, strukturelle Anpassungen und
+              (Squarespace) – Design-Vorschläge, strukturelle Anpassungen und
               Layout­optimierungen.
             </p>
           </article>
@@ -137,8 +136,9 @@ export default function About() {
             <p className="card-label">Standort</p>
             <h3 className="card-title mt-3">Basel / Muttenz</h3>
             <p className="body-text mt-3">
-              Vor Ort in der Region Basel oder vollständig remote. Kommunikation
-              auf Deutsch und Englisch.
+              Vor Ort in der Region Basel oder vollständig remote. Deutsch und
+              Englisch – Schweizerdeutsch verstehe ich, beim Sprechen erspare
+              ich es Ihnen lieber.
             </p>
           </article>
         </div>

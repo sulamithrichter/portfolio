@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     template: "%s · Sulamith Richter",
   },
   description:
-    "Freelance-Entwicklerin aus Basel/Muttenz. Massgeschneiderte Web-Applikationen und KI-Lösungen für Schweizer KMUs – schnell, sauber und wartbar.",
+    "Freelance-Entwicklerin aus Basel/Muttenz. Web-Applikationen und KI-Lösungen für KMUs, Selbstständige und Privatpersonen in der Schweiz.",
   applicationName: "Sulamith Richter — Portfolio",
   authors: [{ name: "Sulamith Richter" }],
   creator: "Sulamith Richter",
@@ -35,13 +35,13 @@ export const metadata: Metadata = {
     siteName: "Sulamith Richter",
     title: "Sulamith Richter — Software, die Prozesse vereinfacht.",
     description:
-      "Web-Apps, KI-Integration und Automatisierung für Schweizer KMUs.",
+      "Web-Apps, KI-Integration und Automatisierung für KMUs, Selbstständige und Privatpersonen in der Schweiz.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Sulamith Richter — Software, die Prozesse vereinfacht.",
     description:
-      "Web-Apps, KI-Integration und Automatisierung für Schweizer KMUs.",
+      "Web-Apps, KI-Integration und Automatisierung für KMUs, Selbstständige und Privatpersonen in der Schweiz.",
   },
   icons: {
     icon: [{ url: "/favicon.svg", type: "image/svg+xml" }],

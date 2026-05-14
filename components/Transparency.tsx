@@ -34,9 +34,9 @@ export default function Transparency() {
             </div>
             <h3 className="card-title mt-5">KI-gestützte Entwicklung</h3>
             <p className="body-text mt-3">
-              Ich arbeite intensiv mit Claude Code (Anthropic). Das bedeutet
-              schnellere Umsetzung – und ich stehe trotzdem vollständig hinter
-              jedem Projekt: ich verstehe, erkläre und warte alles selbst.
+              Ich arbeite intensiv mit Claude Code (Anthropic). Schneller fertig,
+              ja – aber ich erkläre Ihnen jede Zeile, wenn Sie wollen. Und falls
+              Anthropic je den Stecker zieht, läuft Ihre App trotzdem weiter.
             </p>
           </article>
 
