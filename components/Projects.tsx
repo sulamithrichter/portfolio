@@ -13,7 +13,7 @@ const projects: Project[] = [
     tag: "Web-App",
     name: "Workout Tracker",
     description:
-      "Vollständige Web-App mit Login, Datenbank, Progress-Tracking und mobil-optimiertem Design. Alle Komponenten selbst entwickelt, statt fertige Cloud-Bausteine zu kombinieren.",
+      "Vollständige Web-App mit Login, Datenbank, Progress-Tracking und mobil-optimiertem Design. Alle Komponenten selbst entwickelt (bzw. entwickeln lassen), statt fertige Cloud-Bausteine zu kombinieren.",
     stack: ["Next.js 16", "PostgreSQL", "TypeScript", "Tailwind"],
     github: "https://github.com/sulamithrichter/workout-tracker-1",
     accent: "purple",
