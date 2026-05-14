@@ -41,8 +41,8 @@ export default function About() {
               Ich bin Schülerin am Gymnasium Muttenz und studiere parallel
               Informatik an der Universität Basel. Daneben arbeite ich als
               freischaffende Entwicklerin und baue Web-Applikationen, KI-Tools
-              und Automatisierungen für kleine und mittlere Unternehmen oder Privatpersonen in der
-              Region.
+              und Automatisierungen für KMUs, Selbstständige und Privatpersonen
+              in der Schweiz.
             </p>
           </article>
 
@@ -54,7 +54,7 @@ export default function About() {
             </h3>
             <p className="body-text mt-3">
               Ich übernehme Verantwortung für das, was ich abliefere: ich
-              verstehe meinen Code, kann ihn erklären — und falls Sie in zwei
+              verstehe meinen Code, kann ihn erklären – und falls Sie in zwei
               Jahren anrufen, finde ich mich auch dann noch zurecht.
             </p>
           </article>

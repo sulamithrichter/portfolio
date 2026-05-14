@@ -27,7 +27,7 @@ export default function Contact() {
           className="mx-auto mt-5 max-w-xl text-[1rem] leading-relaxed sm:text-[1.05rem]"
           style={{ color: "var(--text-secondary)" }}
         >
-          Schreib mir – ich melde mich innerhalb von 24 Stunden.
+          Schreiben Sie mir – ich melde mich innerhalb von 24 Stunden.
         </p>
 
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3">

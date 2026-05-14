@@ -13,7 +13,7 @@ const projects: Project[] = [
     tag: "Web-App",
     name: "Workout Tracker",
     description:
-      "Vollständige Web-App mit eigener Authentifizierung, Datenbank, Progress-Tracking und mobil-optimiertem Design. Kein Supabase, kein Clerk – alles selbst implementiert.",
+      "Vollständige Web-App mit Login, Datenbank, Progress-Tracking und mobil-optimiertem Design. Alle Komponenten selbst entwickelt, statt fertige Cloud-Bausteine zu kombinieren.",
     stack: ["Next.js 16", "PostgreSQL", "TypeScript", "Tailwind"],
     github: "https://github.com/sulamithrichter/workout-tracker-1",
     accent: "purple",
@@ -22,7 +22,7 @@ const projects: Project[] = [
     tag: "KI-Integration",
     name: "KMU-Chatbot Demo",
     description:
-      "RAG-basierter Chatbot für ein Treuhandbüro: Dokumente werden hochgeladen, Fragen werden gestellt – die Antworten kommen direkt aus den eigenen Unterlagen.",
+      "Demo eines RAG-basierten Chatbots für Treuhand-Anwendungsfälle: Dokumente werden hochgeladen, Fragen werden gestellt – die Antworten kommen direkt aus den eigenen Unterlagen.",
     stack: ["Python", "Claude API", "Flask"],
     accent: "blue",
   },
@@ -44,8 +44,8 @@ export default function Projects() {
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <p className="section-label">Projekte</p>
         <h2 className="mt-3 max-w-2xl text-[1.75rem] font-semibold leading-tight tracking-tight sm:text-[2.25rem]">
-          Ausgewählte Arbeiten und{" "}
-          <span className="gradient-text">Demo-Projekte.</span>
+          Was ich bisher{" "}
+          <span className="gradient-text">gebaut habe.</span>
         </h2>
 
         <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
