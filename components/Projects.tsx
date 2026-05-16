@@ -22,8 +22,9 @@ const projects: Project[] = [
     tag: "KI-Integration",
     name: "KMU-Chatbot Demo",
     description:
-      "Demo eines RAG-basierten Chatbots für Treuhand-Anwendungsfälle: Dokumente werden hochgeladen, Fragen werden gestellt – die Antworten kommen direkt aus den eigenen Unterlagen.",
-    stack: ["Python", "Claude API", "Flask"],
+      "Selbst gebauter RAG-Chatbot für eine (fiktive) Treuhandfirma: Antworten ausschliesslich aus den Firmenunterlagen. Retrieval (TF-IDF, optional Hybrid mit Embeddings + Reranker) komplett selbst implementiert – keine fertigen Cloud-Bausteine.",
+    stack: ["Python", "Flask", "Claude API", "RAG"],
+    github: "https://github.com/sulamithrichter/kmu-chatbot-demo",
     accent: "blue",
   },
 ];
