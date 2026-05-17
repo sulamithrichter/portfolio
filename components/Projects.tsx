@@ -22,7 +22,7 @@ const projects: Project[] = [
     tag: "KI-Integration",
     name: "KMU-Chatbot Demo",
     description:
-      "Selbst gebauter RAG-Chatbot für eine (fiktive) Treuhandfirma: Antworten ausschliesslich aus den Firmenunterlagen. Retrieval (TF-IDF, optional Hybrid mit Embeddings + Reranker) komplett selbst implementiert – keine fertigen Cloud-Bausteine.",
+      "Selbst gebauter RAG-Chatbot für eine (fiktive) Treuhandfirma: Antworten ausschliesslich aus den Firmenunterlagen. Das Retrieval ist selbst gebaut – TF-IDF/Cosine in reinem Python, ohne Vektordatenbank oder RAG-Framework; optionaler Hybrid-Modus mit lokalen Embedding-/Reranker-Modellen. Die Antwortformulierung übernimmt die Anthropic-Claude-API.",
     stack: ["Python", "Flask", "Claude API", "RAG"],
     github: "https://github.com/sulamithrichter/kmu-chatbot-demo",
     accent: "blue",
