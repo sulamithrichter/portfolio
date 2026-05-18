@@ -5,6 +5,7 @@ type Project = {
   stack: string[];
   github?: string;
   demo?: string;
+  demoNote?: string;
   accent: "purple" | "blue";
 };
 
@@ -25,6 +26,9 @@ const projects: Project[] = [
       "Selbst gebauter RAG-Chatbot für eine (fiktive) Treuhandfirma: Antworten ausschliesslich aus den Firmenunterlagen. Das Retrieval ist selbst gebaut – TF-IDF/Cosine in reinem Python, ohne Vektordatenbank oder RAG-Framework; optionaler Hybrid-Modus mit lokalen Embedding-/Reranker-Modellen. Die Antwortformulierung übernimmt die Anthropic-Claude-API.",
     stack: ["Python", "Flask", "Claude API", "RAG"],
     github: "https://github.com/sulamithrichter/kmu-chatbot-demo",
+    demo: "https://sulamith-kmu-chatbot-demo.hf.space",
+    demoNote:
+      "Hinweis: Die Demo läuft auf Gratis-Hosting und kann beim ersten Aufruf ein paar Sekunden laden.",
     accent: "blue",
   },
 ];
@@ -112,6 +116,12 @@ export default function Projects() {
                     </span>
                   )}
                 </div>
+
+                {p.demoNote ? (
+                  <p className="body-text mt-3 text-[0.78rem] opacity-70">
+                    {p.demoNote}
+                  </p>
+                ) : null}
               </div>
             </article>
           ))}
